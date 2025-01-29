@@ -1,4 +1,15 @@
 services:
+  database:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DATABASE: postgres
+      POSTGRES_USER: postgres
+    volumes:
+      - ./database/:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
   springboot:
     build:
       context: ./springboot
@@ -11,4 +22,3 @@ services:
       dockerfile: Dockerfile
     ports:
       - "1234:1234"
-
